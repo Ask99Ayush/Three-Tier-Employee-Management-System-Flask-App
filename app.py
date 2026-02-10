@@ -20,10 +20,8 @@ if not app.secret_key:
     raise RuntimeError("SECRET_KEY must be set in the .env file")
 
 
-# ========================
-# Routes (Application Layer)
-# ========================
 
+# Routes (Application Layer)
 @app.route("/")
 def index():
     employees = get_all_employees()
@@ -83,5 +81,10 @@ def delete_employee_route(employee_id):
     return redirect(url_for("index"))
 
 
+# Application Entry Point
 if __name__ == "__main__":
-    app.run(debug=os.getenv("FLASK_DEBUG") == "True")
+    app.run(
+        host="0.0.0.0",
+        port=5000,
+        debug=os.getenv("FLASK_DEBUG") == "True"
+    )
