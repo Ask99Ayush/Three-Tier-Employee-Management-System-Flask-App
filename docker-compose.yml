@@ -10,7 +10,6 @@ services:
       - .env
     depends_on:
       - mongo
-      - redis
     restart: always
 
   mongo:
@@ -20,16 +19,5 @@ services:
       - mongo_data:/data/db
     restart: always
 
-  redis:
-    image: redis:7-alpine
-    container_name: ems_redis
-    ports:
-      - "6379:6379"
-    volumes:
-      - redis_data:/data
-    command: redis-server --appendonly yes
-    restart: unless-stopped
-
 volumes:
   mongo_data:
-  redis_data:
